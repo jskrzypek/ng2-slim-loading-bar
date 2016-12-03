@@ -7,31 +7,21 @@ import {Component, Input, OnInit} from '@angular/core';
 import {SlimLoadingBarService, SlimLoadingBarEvent, SlimLoadingBarEventType} from './slim-loading-bar.service';
 import {isPresent} from './slim-loading-bar.utils';
 
-export const moduleId = module.id.toString();
 /**
  * A Slim Loading Bar component shows message loading progress bar on the top of web page or parent component.
  */
 @Component({
-    moduleId,
+    // moduleId: module.id.toString(),
     selector: 'ng2-slim-loading-bar',
     template: `
 <div class="slim-loading-bar">
-    <div class="slim-loading-bar-progress" [style.width]="progress" [style.backgroundColor]="color" [style.color]="color"
+    <div class="slim-loading-bar-progress" [style.width]="progress + '%'" [style.backgroundColor]="color" [style.color]="color"
         [style.height]="height" [style.opacity]="show ? '1' : '0'"></div>
 </div>`
 })
 export class SlimLoadingBarComponent implements OnInit {
 
-    private _progress: string = '0%';
-    @Input() set progress(value: string) {
-        if (isPresent(value)) {
-            this._progress = value + '%';
-        }
-    }
-    get progress(): string {
-        return this._progress;
-    }
-
+    @Input() progress: string = '0';
     @Input() color: string = 'firebrick';
     @Input() height: string = '2px';
     @Input() show: boolean = true;
@@ -41,7 +31,7 @@ export class SlimLoadingBarComponent implements OnInit {
     ngOnInit(): any {
         this.service.subject.subscribe((event:SlimLoadingBarEvent) => {
             if (event.type === SlimLoadingBarEventType.PROGRESS) {
-                this.progress = event.value;
+                this.setProgress(event.value);
             } else if (event.type === SlimLoadingBarEventType.COLOR) {
                 this.color = event.value;
             } else if (event.type === SlimLoadingBarEventType.HEIGHT) {
@@ -50,5 +40,11 @@ export class SlimLoadingBarComponent implements OnInit {
                 this.show = event.value;
             }
         });
+    }
+
+    private setProgress(value: string) {
+        if (isPresent(value)) {
+            this.progress = value;
+        }
     }
 }
