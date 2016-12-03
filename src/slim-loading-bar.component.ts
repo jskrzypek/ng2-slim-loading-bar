@@ -38,7 +38,7 @@ export class SlimLoadingBarComponent implements OnInit {
     constructor(private service:SlimLoadingBarService) {}
 
     ngOnInit(): any {
-        this.service.observable.subscribe((event:SlimLoadingBarEvent) => {
+        this.service.subject.subscribe((event:SlimLoadingBarEvent) => {
             if (event.type === SlimLoadingBarEventType.PROGRESS) {
                 this.progress = event.value;
             } else if (event.type === SlimLoadingBarEventType.COLOR) {
