@@ -1,5 +1,6 @@
 import { OnInit } from '@angular/core';
 import { SlimLoadingBarService } from './slim-loading-bar.service';
+export declare const moduleId: string;
 /**
  * A Slim Loading Bar component shows message loading progress bar on the top of web page or parent component.
  */

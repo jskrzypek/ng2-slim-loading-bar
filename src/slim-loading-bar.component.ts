@@ -7,11 +7,12 @@ import {Component, Input, OnInit} from '@angular/core';
 import {SlimLoadingBarService, SlimLoadingBarEvent, SlimLoadingBarEventType} from './slim-loading-bar.service';
 import {isPresent} from './slim-loading-bar.utils';
 
+export const moduleId = module.id.toString();
 /**
  * A Slim Loading Bar component shows message loading progress bar on the top of web page or parent component.
  */
 @Component({
-    moduleId: module.id.toString(),
+    moduleId,
     selector: 'ng2-slim-loading-bar',
     template: `
 <div class="slim-loading-bar">
