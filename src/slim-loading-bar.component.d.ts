@@ -4,7 +4,7 @@ import { SlimLoadingBarService } from './slim-loading-bar.service';
  * A Slim Loading Bar component shows message loading progress bar on the top of web page or parent component.
  */
 export declare class SlimLoadingBarComponent implements OnInit {
-    private service;
+    service: SlimLoadingBarService;
     private _progress;
     progress: string;
     color: string;
