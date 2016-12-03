@@ -35,7 +35,7 @@ export class SlimLoadingBarComponent implements OnInit {
     @Input() height: string = '2px';
     @Input() show: boolean = true;
 
-    constructor(private service:SlimLoadingBarService) {}
+    constructor(private service: SlimLoadingBarService) {}
 
     ngOnInit(): any {
         this.service.subject.subscribe((event:SlimLoadingBarEvent) => {

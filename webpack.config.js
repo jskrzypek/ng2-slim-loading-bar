@@ -25,7 +25,7 @@ module.exports = {
         path: helpers.root('bundles'),
         publicPath: '/',
         filename: 'index.umd.js',
-        sourceMapFilename: '[name].js.map',
+        sourceMapFilename: 'index.umd.js.map',
         libraryTarget: 'umd',
         library: 'ng2-slim-loading-bar'
     },
