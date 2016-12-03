@@ -13,7 +13,7 @@ const DefinePlugin = require('webpack/lib/DefinePlugin');
 const LoaderOptionsPlugin = require('webpack/lib/LoaderOptionsPlugin');
 
 module.exports = {
-    devtool: 'inline-source-map',
+    devtool: 'source-map',
 
     resolve: {
         extensions: ['.ts', '.js']
@@ -25,6 +25,7 @@ module.exports = {
         path: helpers.root('bundles'),
         publicPath: '/',
         filename: 'index.umd.js',
+        sourceMapFilename: 'index.umd.js.map',
         libraryTarget: 'umd',
         library: 'ng2-slim-loading-bar'
     },

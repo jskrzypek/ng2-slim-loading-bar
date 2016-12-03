@@ -4,8 +4,7 @@
 
 import {Injectable} from '@angular/core';
 
-import {Observable} from 'rxjs/Observable';
-import {Subscriber} from 'rxjs/Subscriber';
+import {Subject} from 'rxjs/Subject';
 
 import {isPresent} from './slim-loading-bar.utils';
 
@@ -18,6 +17,10 @@ export enum SlimLoadingBarEventType {
 
 export class SlimLoadingBarEvent {
     constructor(public type:SlimLoadingBarEventType, public value:any) {}
+}
+
+export function slimLoadingBarServiceFactory(): SlimLoadingBarService  {
+    return new SlimLoadingBarService(new Subject<SlimLoadingBarEvent>());
 }
 
 /**
@@ -34,14 +37,7 @@ export class SlimLoadingBarService {
     private _intervalCounterId:any = 0;
     public interval:number = 500; // in milliseconds
 
-    public observable: Observable<SlimLoadingBarEvent>;
-    private subscriber: Subscriber<SlimLoadingBarEvent>;
-
-    constructor() {
-        this.observable = new Observable<SlimLoadingBarEvent>((subscriber:Subscriber<SlimLoadingBarEvent>) => {
-            this.subscriber = subscriber;
-        });
-    }
+    constructor(public subject: Subject<SlimLoadingBarEvent>) {}
 
     set progress(value:number) {
         if (isPresent(value)) {
@@ -92,9 +88,9 @@ export class SlimLoadingBarService {
     }
 
     private emitEvent(event: SlimLoadingBarEvent) {
-        if (this.subscriber) {
+        if (this.subject) {
             // Push up a new event
-            this.subscriber.next(event);
+            this.subject.next(event);
         }
     }
 
